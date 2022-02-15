@@ -1,8 +1,11 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { useRequestAll } from './graphql';
 
 function App() {
+  const { data } = useRequestAll('messages');
+
   return (
     <div className="App">
       <header className="App-header">
@@ -18,6 +21,7 @@ function App() {
         >
           Learn React
         </a>
+        {JSON.stringify(data?.allMessages, null, 2)}
       </header>
     </div>
   );
