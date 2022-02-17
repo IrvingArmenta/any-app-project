@@ -1,6 +1,7 @@
 export type ChannelIdsType = 'general' | 'technology' | 'lgtm';
 export type ResourceType = 'users' | 'channels' | 'messages';
 
+// resouces typing
 export type UserType = {
   id: string;
   name: string;
@@ -18,4 +19,14 @@ export type MessagesType = {
   content: string;
 };
 
-export type Flatten<T> = T extends unknown[] ? T[number] : T;
+// return types
+export interface ApiAllReturnTypes {
+  users: { allUsers: UserType[] };
+  channels: { allChannels: ChannelType[] };
+  messages: { allMessages: MessagesType[] };
+}
+export interface ApiByIdReturnTypes {
+  users: { User: UserType };
+  channels: { Channel: ChannelType };
+  messages: { Message: MessagesType };
+}

@@ -1,29 +1,11 @@
-import { GraphQLClient, request } from 'graphql-request';
-import { getAllQuery, getById } from './queries';
-import {
-  ChannelType,
-  Flatten,
-  MessagesType,
-  ResourceType,
-  UserType,
-} from './types';
+import { GraphQLClient } from 'graphql-request';
+import { getAllQuery, getByIdQuery } from './queries';
+import { ApiAllReturnTypes, ApiByIdReturnTypes } from './types';
 import useSWR from 'swr';
 const serverEndpoint =
   process.env.NODE_ENV === 'development'
     ? 'http://localhost:5000/graphql'
     : 'http://some-fancy-graphql-endpoint.com/graphql';
-
-type ApiReturnTypes = {
-  users: { allUsers: UserType[] };
-  channels: { allChannels: ChannelType[] };
-  messages: { allMessages: MessagesType[] };
-};
-
-type ReturnObjectKeyType = {
-  users: 'allUsers';
-  channels: 'allChannels';
-  messages: 'allMessages';
-};
 
 const graphClient = new GraphQLClient(serverEndpoint);
 
@@ -35,24 +17,36 @@ if (process.env.NODE_ENV === 'development') {
     'Origin, X-Requested-With, Content-Type, Accept'
   );
 }
-
-export const useRequestAll = <T extends ResourceType>(resourceType: T) => {
+/**
+ * Hook to request all the data regarding an specific resource type in the enddpoint
+ * @param resourceType - choose from one of the resources available in the endpoint
+ * @returns Array of data
+ */
+export const useRequestAll = <T extends keyof ApiAllReturnTypes>(
+  resourceType: T
+) => {
   const fetcher = (query: string) =>
-    graphClient.request<ApiReturnTypes[T]>(query);
+    graphClient.request<ApiAllReturnTypes[T]>(query);
 
   const swr = useSWR(getAllQuery(resourceType), fetcher);
 
   return swr;
 };
 
-export const useRequestById = <T extends keyof ApiReturnTypes>(
+/**
+ * Hook to request specific data by using an id and setting the resource type as well
+ * @param resourceType - choose from one of the resources available in the endpoint
+ * @param id - Id of the specific element in the database
+ * @returns An element
+ */
+export const useRequestById = <T extends keyof ApiByIdReturnTypes>(
   resourceType: T,
   id: string
 ) => {
   const fetcher = (query: string) =>
-    graphClient.request<{ data: Flatten<ApiReturnTypes[T]> }>(query);
+    graphClient.request<ApiByIdReturnTypes[T]>(query);
 
-  const swr = useSWR(getById(resourceType, id), fetcher);
+  const swr = useSWR(getByIdQuery(resourceType, id), fetcher);
 
   return swr;
 };

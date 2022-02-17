@@ -2,49 +2,49 @@ module.exports = {
   channels: [
     {
       name: 'General Channel',
-      id: 'general',
+      id: 'general'
     },
     {
       name: 'Technology Channel',
-      id: 'technology',
+      id: 'technology'
     },
     {
       name: 'LGTM Channel',
-      id: 'lgtm',
-    },
+      id: 'lgtm'
+    }
   ],
   users: [
     {
       id: 1,
-      name: 'Joyse',
+      name: 'Joyse'
     },
     {
       id: 2,
-      name: 'Sam',
+      name: 'Sam'
     },
     {
       id: 3,
-      name: 'Russell',
-    },
+      name: 'Russell'
+    }
   ],
   messages: [
     {
       id: 1,
       channel_id: 'general',
       user_id: 1,
-      content: 'Hello',
+      content: 'Hello'
     },
     {
       id: 2,
       channel_id: 'lgtm',
       user_id: 2,
-      content: 'Does it look good to you?',
+      content: 'Does it look good to you?'
     },
     {
       id: 3,
       channel_id: 'technology',
       user_id: 3,
-      content: 'Technology is cool',
-    },
-  ],
+      content: 'Technology is cool'
+    }
+  ]
 };
