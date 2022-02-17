@@ -1,5 +1,5 @@
 import { gql } from 'graphql-request';
-import { ResourceType } from './types';
+import { ApiFilteringMapping, ResourceType } from './types';
 
 const dataProps: Record<ResourceType, string> = {
   users: `id
@@ -37,4 +37,21 @@ export const getByIdQuery = (resourceType: ResourceType, id: string) => {
         }
       }
     `;
+};
+
+export const filterQuery = <T extends ResourceType>(
+  resourceType: T,
+  by: ApiFilteringMapping[T],
+  query: string
+) => {
+  const resourceName =
+    resourceType.charAt(0).toUpperCase() + resourceType.slice(1);
+
+  return gql`
+    {
+      all${resourceName}(filter: { ${by}: "${query}" }) {
+        ${dataProps[resourceType]}
+      }
+    }
+  `;
 };

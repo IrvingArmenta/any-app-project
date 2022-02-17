@@ -13,7 +13,7 @@ const StyledHeader = styled.header`
 const Header = () => {
   return (
     <StyledHeader>
-      <h1>1 day chat app</h1>
+      <h1>1 day chat App</h1>
       <p>All messages will be deleted at every 00:00 UTC</p>
     </StyledHeader>
   );

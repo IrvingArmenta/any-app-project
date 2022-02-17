@@ -10,6 +10,7 @@ const ChannelSelectButton = styled.button<{ active: boolean }>`
   cursor: pointer;
   text-align: left;
   height: 60px;
+  color: ${(p) => p.theme.colors.text};
   background-color: ${(p) => p.theme.colors.surface};
   ${(p) =>
     p.active

@@ -30,3 +30,9 @@ export interface ApiByIdReturnTypes {
   channels: { Channel: ChannelType };
   messages: { Message: MessagesType };
 }
+
+export interface ApiFilteringMapping {
+  users: keyof UserType;
+  channels: keyof ChannelType;
+  messages: keyof MessagesType;
+}
