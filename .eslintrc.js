@@ -1,6 +1,7 @@
 
 module.exports = {
 	extends: [
+	  'plugin:react/recommended',
 	  'plugin:@typescript-eslint/recommended',
 	  'plugin:jest/recommended',
 	  'plugin:prettier/recommended'
@@ -26,13 +27,14 @@ module.exports = {
 	},
 	rules: {
 	  'linebreak-style': 'off',
+	  'react/prop-types': 'off',
 	  'prettier/prettier': [
 			'error',
 			{
 		  endOfLine: 'auto',
 		  singleQuote: true,
 		  semi: true,
-		  trailingCommas: 'none'
+		  trailingComma: 'none'
 			},
 	  ],
 	},

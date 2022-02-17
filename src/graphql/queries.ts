@@ -9,28 +9,31 @@ const dataProps: Record<ResourceType, string> = {
     user_id
     channel_id`,
   channels: `id, 
-    name`,
+    name`
 };
 
-export const getAllQuery = (dataType: ResourceType) => {
+export const getAllQuery = (resourceType: ResourceType) => {
+  const resourceName =
+    resourceType.charAt(0).toUpperCase() + resourceType.slice(1);
+
   return gql`
     {
-      all${dataType.charAt(0).toUpperCase() + dataType.slice(1)} {
-        ${dataProps[dataType]}
+      all${resourceName} {
+        ${dataProps[resourceType]}
       }
     }
   `;
 };
 
-export const getById = (dataType: ResourceType, id: string) => {
+export const getByIdQuery = (resourceType: ResourceType, id: string) => {
   const resourceName = `${
-    dataType.charAt(0).toUpperCase() + dataType.slice(1)
-  }`;
+    resourceType.charAt(0).toUpperCase() + resourceType.slice(1)
+  }`.slice(0, -1);
 
   return gql`
       {
-        ${resourceName.slice(0, -1)}(id: "${id}") {
-          ${dataProps[dataType]}
+        ${resourceName}(id: "${id}") {
+          ${dataProps[resourceType]}
         }
       }
     `;
