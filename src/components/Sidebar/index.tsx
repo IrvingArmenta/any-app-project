@@ -31,7 +31,7 @@ const Sidebar: FC<{
   const { getCurrentUser, currentChannel, getCurrentChannel } = props;
 
   // api
-  const { data: users } = useRequestAll('users');
+  const { data: users, error } = useRequestAll('users');
   const { data: channels } = useRequestAll('channels');
 
   const handleSelectOnChange = useCallback(
@@ -71,6 +71,7 @@ const Sidebar: FC<{
           id="currentUserSelect"
           onChange={(userId) => handleSelectOnChange(userId)}
         />
+        {JSON.stringify(error, null, 2)}
         <nav className="channel-selection">
           <h4>2. Choose your Channel</h4>
           <div className="channel-selection__buttons-wrap">

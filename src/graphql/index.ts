@@ -2,9 +2,11 @@ import { GraphQLClient } from 'graphql-request';
 import { getAllQuery, getByIdQuery } from './queries';
 import { ApiAllReturnTypes, ApiByIdReturnTypes } from './types';
 import useSWR from 'swr';
+const port = process.env.REACT_APP_GRAPHQL_SERVER_PORT;
+
 const serverEndpoint =
   process.env.NODE_ENV === 'development'
-    ? 'http://localhost:5000/graphql'
+    ? `http://localhost:${port}/graphql`
     : 'http://some-fancy-graphql-endpoint.com/graphql';
 
 const graphClient = new GraphQLClient(serverEndpoint);
@@ -25,8 +27,10 @@ if (process.env.NODE_ENV === 'development') {
 export const useRequestAll = <T extends keyof ApiAllReturnTypes>(
   resourceType: T
 ) => {
-  const fetcher = (query: string) =>
-    graphClient.request<ApiAllReturnTypes[T]>(query);
+  const fetcher = async (query: string) => {
+    const data = await graphClient.request<ApiAllReturnTypes[T]>(query);
+    return data;
+  };
 
   const swr = useSWR(getAllQuery(resourceType), fetcher);
 
