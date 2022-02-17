@@ -1,6 +1,10 @@
 import { GraphQLClient } from 'graphql-request';
-import { getAllQuery, getByIdQuery } from './queries';
-import { ApiAllReturnTypes, ApiByIdReturnTypes } from './types';
+import { filterQuery, getAllQuery, getByIdQuery } from './queries';
+import {
+  ApiAllReturnTypes,
+  ApiByIdReturnTypes,
+  ApiFilteringMapping
+} from './types';
 import useSWR from 'swr';
 const port = process.env.REACT_APP_GRAPHQL_SERVER_PORT;
 
@@ -51,6 +55,19 @@ export const useRequestById = <T extends keyof ApiByIdReturnTypes>(
     graphClient.request<ApiByIdReturnTypes[T]>(query);
 
   const swr = useSWR(getByIdQuery(resourceType, id), fetcher);
+
+  return swr;
+};
+
+export const useRequestFilterBy = <T extends keyof ApiByIdReturnTypes>(
+  resourceType: T,
+  by: ApiFilteringMapping[T],
+  query: string
+) => {
+  const fetcher = (query: string) =>
+    graphClient.request<ApiAllReturnTypes[T]>(query);
+
+  const swr = useSWR(filterQuery(resourceType, by, query), fetcher);
 
   return swr;
 };
