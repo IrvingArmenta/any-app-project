@@ -17,6 +17,7 @@ export type MessagesType = {
   channel_id: ChannelIdsType;
   user_id: string;
   content: string;
+  date: string;
 };
 
 // return types
@@ -35,4 +36,10 @@ export interface ApiFilteringMapping {
   users: keyof UserType;
   channels: keyof ChannelType;
   messages: keyof MessagesType;
+}
+
+export interface ApiCreateMapping {
+  users: Omit<UserType, 'id'>;
+  channels: Omit<ChannelType, 'id'>;
+  messages: Omit<MessagesType, 'id'>;
 }

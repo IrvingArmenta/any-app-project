@@ -8,6 +8,7 @@ const Sidebar = lazy(() => import('./Sidebar'));
 export type ChatStateType = {
   currentUser: UserType;
   currentChannel: ChannelType;
+  allUsers: UserType[];
 };
 
 const Chat = () => {
@@ -15,7 +16,8 @@ const Chat = () => {
   // right now is just static
   const [chatState, setChatState] = useSetState<ChatStateType>({
     currentChannel: { id: 'general', name: 'General Channel' },
-    currentUser: { id: '1', name: 'Joyse' }
+    currentUser: { id: '1', name: 'Joyse' },
+    allUsers: []
   });
 
   const getCurrentUser = useCallback((currentUser: UserType) => {
@@ -24,6 +26,10 @@ const Chat = () => {
 
   const getCurrentChannel = useCallback((currentChannel: ChannelType) => {
     setChatState({ currentChannel });
+  }, []);
+
+  const getAllUsers = useCallback((users: UserType[]) => {
+    setChatState({ allUsers: users });
   }, []);
 
   return (
@@ -36,12 +42,13 @@ const Chat = () => {
               currentChannel={chatState.currentChannel}
               getCurrentUser={getCurrentUser}
               getCurrentChannel={getCurrentChannel}
+              getAllUsers={getAllUsers}
             />
           </Suspense>
         }
         chatWindowComponent={
           <Suspense fallback={<p>loading...</p>}>
-            <ChatWindow chatState={chatState} />
+            <ChatWindow chatState={chatState} usersList={chatState.allUsers} />
           </Suspense>
         }
       />

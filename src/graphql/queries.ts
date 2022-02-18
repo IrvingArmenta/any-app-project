@@ -1,13 +1,14 @@
 import { gql } from 'graphql-request';
 import { ApiFilteringMapping, ResourceType } from './types';
 
-const dataProps: Record<ResourceType, string> = {
+export const dataProps: Record<ResourceType, string> = {
   users: `id
         name`,
   messages: `id
     content
     user_id
-    channel_id`,
+    channel_id
+    date`,
   channels: `id, 
     name`
 };

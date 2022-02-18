@@ -18,6 +18,7 @@ export const StyledButton = styled.button<{
   align-items: center;
   padding: 6px 12px;
   font-size: 1rem;
+  line-height: 1.5;
   border: 1px solid transparent;
   border-radius: 0.25rem;
   user-select: none;
@@ -36,6 +37,10 @@ export const StyledButton = styled.button<{
   &:where(:hover, :focus-visible) {
     background-color: ${(p) =>
       darken(0.03, p.theme.colors[p.variant || 'primary'])};
+  }
+
+  &:focus-visible {
+    box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
   }
 
   &:disabled {
