@@ -12,6 +12,9 @@ export const StyledTextAreaWrap = styled.div`
     background-color: ${(p) => p.theme.colors.background};
     background-clip: padding-box;
     border: 1px solid #ced4da;
+    font-family: inherit;
+    color: inherit;
+    font-size: 1rem;
     border-radius: 0.25rem;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 

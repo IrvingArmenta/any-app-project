@@ -13,7 +13,7 @@ const serverEndpoint =
     ? `http://localhost:${port}/graphql`
     : 'http://some-fancy-graphql-endpoint.com/graphql';
 
-const graphClient = new GraphQLClient(serverEndpoint);
+export const graphClient = new GraphQLClient(serverEndpoint);
 
 // CORS
 if (process.env.NODE_ENV === 'development') {

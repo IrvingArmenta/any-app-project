@@ -32,9 +32,10 @@ img, picture, video, canvas, svg {
   max-width: 100%;
 }
 
-img, picture, video, canvas, svg {
-  display: block;
-  max-width: 100%;
+ul, ol {
+  padding: 0;
+  margin: 0;
+  list-style: none;
 }
 
 p, h1, h2, h3, h4, h5, h6 {

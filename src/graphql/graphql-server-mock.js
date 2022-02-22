@@ -1,3 +1,19 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const faker = require('@faker-js/faker').faker;
+
+const randomMessages = new Array(30).fill(null).map((message, i) => {
+  return {
+    id: i + 1,
+    channel_id: faker.random.arrayElements(
+      ['general', 'technology', 'lgtm'],
+      1
+    )[0],
+    user_id: faker.random.arrayElements(['1', '2', '3'], 1)[0],
+    date: faker.date.recent(),
+    content: faker.lorem.sentences()
+  };
+});
+
 module.exports = {
   channels: [
     {
@@ -27,27 +43,5 @@ module.exports = {
       name: 'Russell'
     }
   ],
-  messages: [
-    {
-      id: 1,
-      channel_id: 'general',
-      user_id: 1,
-      date: new Date(2022, 02, 10),
-      content: 'Hello'
-    },
-    {
-      id: 2,
-      channel_id: 'lgtm',
-      date: new Date(2022, 02, 12),
-      user_id: 2,
-      content: 'Does it look good to you?'
-    },
-    {
-      id: 3,
-      channel_id: 'technology',
-      date: new Date(2022, 02, 10),
-      user_id: 3,
-      content: 'Technology is cool'
-    }
-  ]
+  messages: randomMessages
 };

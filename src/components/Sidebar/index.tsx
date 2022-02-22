@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useMemo } from 'react';
+import React, { FC, useCallback, useEffect, useMemo } from 'react';
 import styled from 'styled-components';
 import { Select } from '../../global-components';
 import ErrorBoundary from '../../global-components/ErrorBoundary';
@@ -27,8 +27,10 @@ const Sidebar: FC<{
   currentChannel: ChannelType;
   getCurrentUser: (user: UserType) => void;
   getCurrentChannel: (channel: ChannelType) => void;
+  getAllUsers: (users: UserType[]) => void;
 }> = (props) => {
-  const { getCurrentUser, currentChannel, getCurrentChannel } = props;
+  const { getCurrentUser, currentChannel, getCurrentChannel, getAllUsers } =
+    props;
 
   // api
   const { data: users, error } = useRequestAll('users');
@@ -57,6 +59,12 @@ const Sidebar: FC<{
 
     return [];
   }, [users?.allUsers]);
+
+  useEffect(() => {
+    if (users) {
+      getAllUsers(users.allUsers);
+    }
+  }, [users]);
 
   const handleChannelSelection = (channel: ChannelType) => {
     getCurrentChannel(channel);
