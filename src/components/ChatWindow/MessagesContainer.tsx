@@ -3,6 +3,7 @@ import React, {
   FC,
   useCallback,
   useEffect,
+  useLayoutEffect,
   useRef,
   useState
 } from 'react';
@@ -77,6 +78,24 @@ const MessagesContainer: FC<{
       );
 
       setChatMessagesCopy({ messages: [...mappedCopy] });
+    }
+  }, [channelMessages?.allMessages]);
+
+  useLayoutEffect(() => {
+    if (channelMessages) {
+      if (channelMessages.allMessages.length && messagesWrapRef.current) {
+        console.log(
+          messagesWrapRef.current,
+          channelMessages.allMessages.length
+        );
+        const h = messagesWrapRef.current.scrollHeight;
+        console.log(h, channelMessages.allMessages.length);
+        setTimeout(() => {
+          if (messagesWrapRef.current) {
+            messagesWrapRef.current.scrollTop = h || 0;
+          }
+        }, 1);
+      }
     }
   }, [channelMessages?.allMessages]);
 
