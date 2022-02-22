@@ -34,7 +34,6 @@ const Chat = () => {
 
   return (
     <>
-      {JSON.stringify(chatState, null, 2)}
       <ChatLayout
         sidebarComponent={
           <Suspense fallback={<p>loading...</p>}>
