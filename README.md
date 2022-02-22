@@ -1,3 +1,20 @@
+# Steps to reproduce this locally
+1 - Clone the repository 
+```bash
+git clone git@github.com:IrvingArmenta/any-app-project.git
+```
+2 - install packages
+```bash
+yarn install 
+```
+3 - Start development with graphql server in localhost:9090
+```bash
+yarn dev 
+```
+This will start both the React client in `http://localhost:3000/` and the graphql server in `http://localhost:9090/`
+
+THAT'S IT!!
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
